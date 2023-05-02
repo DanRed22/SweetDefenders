@@ -1,26 +1,47 @@
 package application;
-	
-import javafx.application.Application;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+import tilemanager.Tile;
 
 public class Main extends Application {
-	@Override
-	public void start(Stage primaryStage) {
-		try {
-			BorderPane root = new BorderPane();
-			Scene scene = new Scene(root,400,400);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.show();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
+	public static final double SCREEN_RESOLUTION_X = 1280;
+	public static final double SCREEN_RESOLUTION_Y = 720;
 	
-	public static void main(String[] args) {
-		launch(args);
-	}
+	
+	//Player Stats
+    public static int coins = 10000;
+    
+    
+
+    @Override
+    public void start(Stage primaryStage) {
+
+
+    	MainView mainView = new MainView();
+        Scene scene = new Scene(mainView, 1280, 720);
+        primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
+        primaryStage.show();
+        primaryStage.setTitle("Sweet Defenders Alpha1.0");
+        try{
+        Image game_icon = new Image(getClass().getResourceAsStream("/resources/candy_icon.png"));
+        primaryStage.getIcons().add(game_icon);
+        }catch(Exception e) {
+        	e.printStackTrace();
+        }
+        
+        mainView.draw();
+    }
+
+
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+    
+   
 }
