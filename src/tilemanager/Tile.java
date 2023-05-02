@@ -33,16 +33,17 @@ public class Tile extends StackPane {
             border.setStrokeType(StrokeType.INSIDE);
 
             setOnMouseClicked(new EventHandler<MouseEvent>() {
+            	int coins = Main.DATA.getCandyCoins();
                 @Override
                 public void handle(MouseEvent event) {
                     if (!occupied && currentTurretType != "None") {
-                    	if (currentTurretType == "Vanilla Tower" && Main.coins >= 100){
+                    	if (currentTurretType == "Vanilla Tower" && coins>= 100){
             				System.out.println("Selected Vanilla Tower $100");
             				placeObject(tileopt.tile_option[0].getTileName(), tileopt.tile_option[0].getCost());
-            			}else if (currentTurretType == "Choco Tower" && Main.coins >= 150) {
+            			}else if (currentTurretType == "Choco Tower" && coins >= 150) {
             				System.out.println("Selected Choco Tower $150");
             				placeObject(tileopt.tile_option[1].getTileName(), tileopt.tile_option[1].getCost());
-            			}else if (currentTurretType == "Candy Mine" && Main.coins >= 50) {
+            			}else if (currentTurretType == "Candy Mine" && coins >= 50) {
             				System.out.println("Selected Candy Mine $50");
             				placeObject(tileopt.tile_option[2].getTileName(), tileopt.tile_option[2].getCost());
             			}else if (!occupied && currentTurretType == "Hammer"){
@@ -63,19 +64,28 @@ public class Tile extends StackPane {
         }
 
         public void placeObject(String name, int val) {
-        	 Rectangle object;
+        	int coins = Main.DATA.getCandyCoins();
+        	int subtract = 0;
+        	Rectangle object;
             occupied = true;
-            Main.coins-= val;
-            System.out.println(Main.coins);
             if (name == "Vanilla Tower"){
             	 object = new Rectangle(TILE_SIZE, TILE_SIZE, Color.GREY);
+            	 subtract = 100;
 			}else if (name == "Choco Tower") {
+				subtract = 150;
 				 object = new Rectangle(TILE_SIZE, TILE_SIZE, Color.BROWN);
 			}else if (name == "Candy Mine") {
+				subtract = 50;
 				 object = new Rectangle(TILE_SIZE, TILE_SIZE, Color.LIGHTGOLDENRODYELLOW);
 			}else {
 				 object = new Rectangle(TILE_SIZE, TILE_SIZE, Color.RED);
 			}
+            Main.DATA.subtractCandyCoins(subtract);
+            
+            /*DEBUG*/
+            System.out.println("CANDY COIN BALANCE: "+ coins);
+            
+            
             object.setStroke(Color.BLACK);
             object.setStrokeWidth(1);
             object.setStrokeType(StrokeType.INSIDE);

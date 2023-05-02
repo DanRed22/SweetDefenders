@@ -1,5 +1,6 @@
 package application;
 
+import application.GameConstants;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -8,12 +9,9 @@ import javafx.stage.Stage;
 import tilemanager.Tile;
 
 public class Main extends Application {
-	public static final double SCREEN_RESOLUTION_X = 1280;
-	public static final double SCREEN_RESOLUTION_Y = 720;
+	public GameConstants CONST = new GameConstants();
+	public static GameData DATA = new GameData();
 	
-	
-	//Player Stats
-    public static int coins = 10000;
     
     
 
@@ -21,8 +19,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
 
 
-    	MainView mainView = new MainView();
-        Scene scene = new Scene(mainView, 1280, 720);
+    	MainView mainView = new MainView(DATA);
+        Scene scene = new Scene(mainView,CONST.SCREEN_RESOLUTION_X , CONST.SCREEN_RESOLUTION_Y);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();

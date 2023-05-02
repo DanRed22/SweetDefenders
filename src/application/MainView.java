@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
 import tilemanager.Tile;
 
 public class MainView extends VBox{
-	
+	public GameConstants CONST = new GameConstants();
 	private Canvas canvas;
 	public static final int TILE_SIZE = 100;
     public static final int MAP_SIZE_ROW = 5;
@@ -18,10 +18,11 @@ public class MainView extends VBox{
     public Tile[][] map = new Tile[MAP_SIZE_ROW][MAP_SIZE_COL];
     Scene scene;
     
-	public MainView(){
-		
-		canvas = new Canvas(Main.SCREEN_RESOLUTION_X, Main.SCREEN_RESOLUTION_Y);
-      GridPane grid = new GridPane();
+	public MainView(GameData DATA){
+	
+	GridPane TurretPicker = new GridPane();
+	canvas = new Canvas(CONST.SCREEN_RESOLUTION_X, CONST.SCREEN_RESOLUTION_Y);
+    GridPane grid = new GridPane();
 
       for (int row = 0; row < MAP_SIZE_ROW; row++) {
           for (int col = 0; col < MAP_SIZE_COL; col++) {
@@ -38,7 +39,7 @@ public class MainView extends VBox{
 		GraphicsContext g = this.canvas.getGraphicsContext2D();
 		
 		g.setFill(Color.LIGHTGRAY);
-		g.fillRect(0, 0, Main.SCREEN_RESOLUTION_X, Main.SCREEN_RESOLUTION_Y);
+		g.fillRect(0, 0, CONST.SCREEN_RESOLUTION_X, CONST.SCREEN_RESOLUTION_Y);
 	}
 
 	public void update() {
